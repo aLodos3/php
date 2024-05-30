@@ -1,5 +1,7 @@
 <?php
 
+require 'dbconfig.php';
+
 class Database {
     private $host = DB_HOST;
     private $user = DB_USER;
@@ -16,12 +18,11 @@ class Database {
         }
     }
 
-    public function searchMovies($title) {
-        $sql = "SELECT * FROM pelicula WHERE titulo LIKE :title";
-        $stmt = $this->conn->prepare($sql);
-        $searchTerm = "%" . $title . "%";
-        $stmt->bindParam(':title', $searchTerm, PDO::PARAM_STR);
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    public function getConnection() {
+        return $this->conn;
+    }
+
+    public function disconnect() {
+        $this->conn = null;
     }
 }

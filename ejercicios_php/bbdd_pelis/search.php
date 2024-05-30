@@ -1,11 +1,10 @@
 <?php
-require 'dbconfig.php';
-require 'Database.php';
+require 'Movie.php';
 
 if (isset($_GET['title'])) {
     $title = $_GET['title'];
-    $db = new Database();
-    $result = $db->searchMovies($title);
+    $movie = new Movie();
+    $result = $movie->searchMoviesByTitle($title);
 
     if (count($result) > 0) {
         echo "<h2>Resultados de la búsqueda:</h2>";
